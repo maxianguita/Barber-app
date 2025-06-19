@@ -12,7 +12,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('📤 Enviando login con:', { email, password });
+    // console.log('📤 Enviando login con:', { email, password });
 
     try {
       const res = await axios.post('http://localhost:3001/api/auth/login', {
@@ -20,7 +20,7 @@ const Login = () => {
         password,
       });
 
-      console.log('✅ Respuesta del servidor:', res.data);
+      // console.log('✅ Respuesta del servidor:', res.data);
 
       const { token, user } = res.data;
 
@@ -28,11 +28,11 @@ const Login = () => {
         localStorage.setItem('token', token);
         localStorage.setItem('user', JSON.stringify(user));
 
-        console.log('🔐 Token guardado en localStorage:', token);
-        console.log('👤 Usuario guardado en localStorage:', user);
+        // console.log('🔐 Token guardado en localStorage:', token);
+        // console.log('👤 Usuario guardado en localStorage:', user);
 
         navigate('/paneladmin');
-        console.log('➡️ Navegando a /paneladmin');
+        // console.log('➡️ Navegando a /paneladmin');
       } else {
         console.warn('⚠️ Respuesta inválida del servidor:', res.data);
         alert('Respuesta inválida del servidor');

@@ -39,7 +39,7 @@ const verifyToken = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, jwtSecret);
-    console.log('Token decodificado:', decoded);
+    // console.log('Token decodificado:', decoded);
     req.user = decoded; // ahora req.user tiene { id, rol, nombre, etc }
     next();
   } catch (err) {

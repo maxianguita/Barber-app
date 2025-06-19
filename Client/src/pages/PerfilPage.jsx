@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { CalendarDays, Clock, Scissors, UserCircle, LogOut } from 'lucide-react';
+import { toast } from 'sonner';
 
 const ModalPerfil = ({ onClose }) => {
   const [turnos, setTurnos] = useState([]);
-  const { user, token, logout } = useAuth(); // agregamos logout
+  const { user, token, logout } = useAuth(); 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const ModalPerfil = ({ onClose }) => {
         );
         setTurnos(ordenados);
       } catch (error) {
-        alert(error.message);
+        toast.error(error.message);
       } finally {
         setLoading(false);
       }
@@ -31,7 +32,9 @@ const ModalPerfil = ({ onClose }) => {
   }, [token]);
 
   const handleCancelarTurno = async (id) => {
-    if (!window.confirm('¿Querés cancelar este turno?')) return;
+    const confirmado = window.confirm('¿Querés cancelar este turno?');
+    if (!confirmado) return;
+
     try {
       const res = await fetch(`http://localhost:3001/api/turnos/${id}`, {
         method: 'DELETE',
@@ -39,10 +42,11 @@ const ModalPerfil = ({ onClose }) => {
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Error al cancelar turno');
+
       setTurnos((prev) => prev.filter((t) => t.id !== id));
-      alert('Turno cancelado correctamente');
+      toast.success('Turno cancelado correctamente');
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
     }
   };
 
@@ -61,6 +65,7 @@ const ModalPerfil = ({ onClose }) => {
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-white hover:text-red-400 text-3xl font-bold transition"
+          aria-label="Cerrar"
         >
           &times;
         </button>

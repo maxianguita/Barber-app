@@ -97,7 +97,7 @@ const obtenerTurnos = async (req, res) => {
 // Crear un turno validando disponibilidad
 const crearTurno = async (req, res) => {
   try {
-    console.log('Usuario autenticado:', req.user); // Debug opcional
+    console.log('Usuario autenticado:', req.user); 
 
     const { nombre, telefono, servicio, fecha, hora, profesionalId, disponibilidadId } = req.body;
     const usuarioId = req.user.id; // 👈 esto lo tomás del token
