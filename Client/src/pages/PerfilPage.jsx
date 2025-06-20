@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { CalendarDays, Clock, Scissors, UserCircle, LogOut } from 'lucide-react';
+import { CalendarDays, Clock, Scissors, UserCircle, LogOut, X } from 'lucide-react';
 import { toast } from 'sonner';
 
 const ModalPerfil = ({ onClose }) => {
   const [turnos, setTurnos] = useState([]);
   const { user, token, logout } = useAuth(); 
   const [loading, setLoading] = useState(false);
+
+  // Estado para modal de confirmación de cancelación
+  const [cancelConfirmId, setCancelConfirmId] = useState(null);
 
   useEffect(() => {
     const fetchTurnos = async () => {
@@ -32,9 +35,6 @@ const ModalPerfil = ({ onClose }) => {
   }, [token]);
 
   const handleCancelarTurno = async (id) => {
-    const confirmado = window.confirm('¿Querés cancelar este turno?');
-    if (!confirmado) return;
-
     try {
       const res = await fetch(`http://localhost:3001/api/turnos/${id}`, {
         method: 'DELETE',
@@ -45,6 +45,7 @@ const ModalPerfil = ({ onClose }) => {
 
       setTurnos((prev) => prev.filter((t) => t.id !== id));
       toast.success('Turno cancelado correctamente');
+      setCancelConfirmId(null);
     } catch (error) {
       toast.error(error.message);
     }
@@ -112,12 +113,30 @@ const ModalPerfil = ({ onClose }) => {
                     <p className="flex items-center gap-2"><UserCircle size={16} /> <strong>Profesional:</strong> {turno.Profesional?.nombre}</p>
                     <p><strong>Especialidad:</strong> {turno.Profesional?.especialidad}</p>
                   </div>
-                  <button
-                    onClick={() => handleCancelarTurno(turno.id)}
-                    className="mt-4 sm:mt-0 sm:ml-6 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition"
-                  >
-                    Cancelar
-                  </button>
+
+                  {cancelConfirmId === turno.id ? (
+                    <div className="flex items-center gap-2 mt-4 sm:mt-0 sm:ml-6">
+                      <button
+                        onClick={() => handleCancelarTurno(turno.id)}
+                        className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg transition font-semibold"
+                      >
+                        Confirmar Cancelación
+                      </button>
+                      <button
+                        onClick={() => setCancelConfirmId(null)}
+                        className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg transition"
+                      >
+                        <X size={20} />
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => setCancelConfirmId(turno.id)}
+                      className="mt-4 sm:mt-0 sm:ml-6 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition"
+                    >
+                      Cancelar
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>

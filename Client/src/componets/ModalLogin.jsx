@@ -31,12 +31,11 @@ const ModalLogin = ({ onClose }) => {
         }
       );
 
-      const { token, user } = res.data;
+      // 💡 Corregido: usamos `usuario` como viene del backend
+      const { token, usuario } = res.data;
 
-      if (token && user) {
-        // Usamos la función login del contexto para actualizar estado y localStorage
-        login({ userData: user, token });
-
+      if (token && usuario) {
+        login({ userData: usuario, token });
         toast.success('✅ Inicio de sesión exitoso');
 
         setTimeout(() => {

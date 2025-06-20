@@ -16,7 +16,8 @@ const ModalRegister = ({ onClose, onRegisterSuccess }) => {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:3001/api/usuarios', {
+      const res = await axios.post('http://localhost:3001/api/auth/register', {
+
         nombre,
         email,
         password,
