@@ -173,7 +173,7 @@ const TurnosPage = () => {
     <>
       <button
         onClick={() => navigate('/')}
-        className="flex items-center text-gray-600 hover:text-indigo-600 transition mb-6"
+        className="flex items-center text-gray-600 hover:text-indigo-600 transition mb-6 mt-10"
       >
         <ArrowLeft className="w-5 h-5 mr-2" />
         Volver al inicio
