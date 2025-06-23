@@ -106,15 +106,16 @@ const Home = () => {
 
       {/* WhatsApp Button */}
       {showWhatsApp && (
-        <a
-          href="https://wa.me/5491135636555"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="fixed bottom-5 right-5 z-50 bg-green-500 hover:bg-green-400 text-white text-3xl p-3 rounded-full shadow-md transition-all"
-        >
-          <i className="fab fa-whatsapp"></i>
-        </a>
-      )}
+  <a
+    href="https://wa.me/5491135636555"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="fixed bottom-4 right-4 z-50 bg-green-500 hover:bg-green-400 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all"
+  >
+    <i className="fab fa-whatsapp text-2xl"></i>
+  </a>
+)}
+
 
       {/* Mapa */}
       <div className="w-full max-w-6xl">

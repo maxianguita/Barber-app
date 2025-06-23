@@ -23,19 +23,19 @@ app.use(express.json());
 
 // Rutas
 app.use('/api/usuarios', userRoutes);
-console.log('✅ Usuarios routes registrados');
+// console.log('✅ Usuarios routes registrados');
 
 app.use('/api/auth', authRoutes);
-console.log('✅ Auth routes registrados');
+// console.log('✅ Auth routes registrados');
 
 app.use('/api/turnos', turnoRoutes);
-console.log('✅ Turnos routes registrados');
+// console.log('✅ Turnos routes registrados');
 
 app.use('/api/disponibilidad', disponibilidadRoutes);
-console.log('✅ Disponibilidad routes registradas');
+// console.log('✅ Disponibilidad routes registradas');
 
 app.use('/api/profesionales', profesionalRoutes);
-console.log('✅ Profesional routes registradas');
+// console.log('✅ Profesional routes registradas');
 
 // Definición de relaciones (muy importante antes de sincronizar)
 Profesional.hasMany(Slot, { foreignKey: 'profesionalId' });
@@ -57,7 +57,7 @@ sequelize.sync()
       });
       console.log('👑 Usuario admin creado');
     } else {
-      console.log('👑 Usuario admin ya existe');
+      // console.log('👑 Usuario admin ya existe');
     }
     // Iniciar servidor
     const PORT = process.env.PORT || 3001;

@@ -122,7 +122,7 @@ const authController = {
   login: async (req, res) => {
     try {
       const { email, password } = req.body;
-      console.log("📥 Login recibido:", email, password);
+      // console.log("📥 Login recibido:", email, password);
 
       const user = await User.findOne({ where: { email } });
 

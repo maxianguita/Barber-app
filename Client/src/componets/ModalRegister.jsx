@@ -11,13 +11,14 @@ const ModalRegister = ({ onClose, onRegisterSuccess }) => {
 
   const { login } = useAuth();
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const handleRegister = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const res = await axios.post('http://localhost:3001/api/auth/register', {
-
+      const res = await axios.post(`${API_URL}/api/auth/register`, {
         nombre,
         email,
         password,
@@ -26,7 +27,6 @@ const ModalRegister = ({ onClose, onRegisterSuccess }) => {
 
       const { token, usuario } = res.data;
 
-      // Usamos la función login del contexto para actualizar estado y localStorage
       login({ userData: usuario, token });
 
       if (typeof onRegisterSuccess === 'function') {

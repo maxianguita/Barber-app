@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import video from '../video/barberia2.mp4';
 import ModalRegister from './ModalRegister';
 import ModalLogin from './ModalLogin';
-import ModalPerfil from '../pages/PerfilPage'; 
+import ModalPerfil from '../pages/PerfilPage';
 import React from 'react';
 import logo1 from '../assets/barber_files/barbershop.png';
 import { useAuth } from '../context/AuthContext';
 import userlogo from '../assets/barber_files/usuario.png';
 import { LogOut } from 'lucide-react';
+import backgroundImage from '../assets/barber_files/barberfondo4.webp'; 
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -53,16 +53,23 @@ const Navbar = () => {
 
   return (
     <nav className="relative w-full z-50 bg-black">
+      {/* Fondo de imagen en lugar del video */}
       {location.pathname === '/' && (
-        <video
-          className="absolute top-0 left-0 w-full h-screen object-cover z-10"
-          autoPlay
-          muted
-          loop
-        >
-          <source src={video} type="video/mp4" />
-        </video>
-      )}
+  <div className="absolute top-0 left-0 w-full h-screen z-10 overflow-hidden">
+    {/* Imagen de fondo */}
+    <img
+      src={backgroundImage}
+      alt="Background"
+      className="w-full h-full object-cover object-center"
+    />
+
+    {/* Capa de desenfoque */}
+    <div className="absolute inset-0 backdrop-blur-[4px] bg-black/30"></div>
+  </div>
+)}
+
+
+
 
       <div className="container mx-auto flex items-center justify-between relative z-50 p-4">
         {!isOpen && (
