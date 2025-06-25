@@ -1,3 +1,4 @@
+// Cambio mínimo para forzar deploy en Vercel - 2025-06-21
 import axios from 'axios';
 
 // URL base del backend desde variable de entorno o por defecto
