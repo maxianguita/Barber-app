@@ -3,7 +3,8 @@ import axios from 'axios';
 
 // URL base del backend desde variable de entorno o por defecto
 //const API = 'http://localhost:3001/api';
-const API = `${process.env.REACT_APP_API_URL}/api`;
+const API = `${import.meta.env.VITE_API_URL}/api`;
+
 
 
 
