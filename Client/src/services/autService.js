@@ -5,11 +5,6 @@ import axios from 'axios';
 //const API = 'http://localhost:3001/api';
 const API = `${import.meta.env.VITE_API_URL}/api`;
 
-
-
-
-
-
 // Función para hacer login
 export const login = async (email, password) => {
   try {
