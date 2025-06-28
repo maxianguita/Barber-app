@@ -11,7 +11,11 @@ const ModalRegister = ({ onClose, onRegisterSuccess }) => {
 
   const { login } = useAuth();
 
-  const API_URL = process.env.REACT_APP_API_URL;
+  // const API_URL = process.env.REACT_APP_API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
+
+console.log("Valor de VITE_API_URL en ModalRegister:", API_URL);
+
 
   const handleRegister = async (e) => {
     e.preventDefault();

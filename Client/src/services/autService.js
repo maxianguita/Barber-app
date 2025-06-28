@@ -5,8 +5,6 @@ import axios from 'axios';
 //const API = 'http://localhost:3001/api';
 const API = `${import.meta.env.VITE_API_URL.trim()}/api`;
 
-
-
 console.log("Valor de VITE_API_URL:", import.meta.env.VITE_API_URL);
 console.log("URL completa del API:", API);
 
