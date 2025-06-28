@@ -9,11 +9,13 @@ const ModalUser = ({ onClose }) => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const handleRegister = async (e) => {
     e.preventDefault();
 
     try {
-      await axios.post('http://localhost:3001/api/usuarios', {
+      await axios.post(`${API_URL}/api/usuarios`, {
         nombre,
         email,
         password,

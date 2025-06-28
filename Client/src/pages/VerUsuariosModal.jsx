@@ -8,6 +8,9 @@ const VerUsuariosModal = ({ onClose }) => {
   const [tipoMensaje, setTipoMensaje] = useState('');
   const [confirmarId, setConfirmarId] = useState(null);
 
+
+  const API_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const fetchUsuarios = async () => {
       try {
@@ -15,7 +18,7 @@ const VerUsuariosModal = ({ onClose }) => {
         console.log('Token que se está enviando:', token);
         if (!token) throw new Error('No hay token de autenticación');
 
-        const res = await axios.get('http://localhost:3001/api/usuarios', {
+       const res = await axios.get(`${API_URL}/api/usuarios`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -42,7 +45,7 @@ const VerUsuariosModal = ({ onClose }) => {
   const eliminarUsuario = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:3001/api/usuarios/${id}`, {
+      await axios.delete(`${API_URL}/api/usuarios/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

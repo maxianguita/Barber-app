@@ -10,12 +10,16 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  const API_URL = import.meta.env.VITE_URL;
+  console.log("🔗 API_URL en Login:", API_URL);
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log('📤 Enviando login con:', { email, password });
 
     try {
-      const res = await axios.post('http://localhost:3001/api/auth/login', {
+      const res = await axios.post(`${API_URL}/api/auth/login`, {
         email,
         password,
       });

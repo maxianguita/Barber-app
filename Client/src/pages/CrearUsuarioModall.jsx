@@ -11,6 +11,10 @@ const CrearUsuarioModal = ({ onClose }) => {
   const [mensaje, setMensaje] = useState('');
   const [tipoMensaje, setTipoMensaje] = useState(''); // 'success' o 'error'
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
+  console.log("API_URL en CrearUsuarioModal:", API_URL);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -25,7 +29,7 @@ const CrearUsuarioModal = ({ onClose }) => {
     e.preventDefault();
 
     try {
-      const res = await axios.post('http://localhost:3001/api/usuarios', formData);
+      const res = await axios.post(`${API_URL}/api/usuarios`, formData);
       if (res.status === 201) {
         mostrarMensaje('Usuario creado con éxito', 'success');
         onClose(); // Cerrar el modal después de la creación

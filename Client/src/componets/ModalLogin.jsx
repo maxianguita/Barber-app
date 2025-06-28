@@ -10,6 +10,9 @@ const ModalLogin = ({ onClose }) => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  const API_URL = import.meta.env.VITE_URL;
+  console.log("🔗 API_URL en ModalLogin:", API_URL);
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -21,8 +24,8 @@ const ModalLogin = ({ onClose }) => {
     setIsLoading(true);
 
     try {
-      const res = await axios.post(
-        'http://localhost:3001/api/auth/login',
+       const res = await axios.post(
+        `${API_URL}/api/auth/login`,
         { email, password },
         {
           headers: {

@@ -8,14 +8,18 @@ const ModalPerfil = ({ onClose }) => {
   const { user, token, logout } = useAuth(); 
   const [loading, setLoading] = useState(false);
 
+  
+
   // Estado para modal de confirmación de cancelación
   const [cancelConfirmId, setCancelConfirmId] = useState(null);
+
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchTurnos = async () => {
       setLoading(true);
       try {
-        const res = await fetch('http://localhost:3001/api/turnos/mis-turnos', {
+        const res = await fetch(`${API_URL}/api/turnos/mis-turnos`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -36,7 +40,7 @@ const ModalPerfil = ({ onClose }) => {
 
   const handleCancelarTurno = async (id) => {
     try {
-      const res = await fetch(`http://localhost:3001/api/turnos/${id}`, {
+      const res = await fetch(`${API_URL}/api/turnos/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
