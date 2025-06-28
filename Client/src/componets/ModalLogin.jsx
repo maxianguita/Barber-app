@@ -10,7 +10,7 @@ const ModalLogin = ({ onClose }) => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const API_URL = import.meta.env.VITE_URL;
+  const API_URL = import.meta.env.VITE_API_URL;
   console.log("🔗 API_URL en ModalLogin:", API_URL);
 
   const handleLogin = async (e) => {

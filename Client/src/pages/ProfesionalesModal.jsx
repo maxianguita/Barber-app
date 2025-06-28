@@ -4,11 +4,16 @@ const ProfesionalesModal = ({ onClose }) => {
   const [nombre, setNombre] = useState('');
   const [especialidad, setEspecialidad] = useState('');
   const [disponibilidad, setDisponibilidad] = useState([{ dia: '', horaInicio: '', horaFin: '' }]);
+
+  const API_URL = import.meta.env.VITE_API_URL.trim();
+
+
   
   // Extraigo fetchProfesionales para usarlo en varios lugares
   const fetchProfesionales = async () => {
     try {
-      const res = await fetch('http://localhost:3001/api/profesionales/con-disponibilidad');
+      const res = await fetch(`${API_URL}/api/profesionales/con-disponibilidad`);
+     
       const data = await res.json();
       console.log(data);
       setProfesionales(data);
@@ -47,7 +52,7 @@ const ProfesionalesModal = ({ onClose }) => {
     if (!nombreTrim || !especialidadTrim || disponibilidadFiltrada.length === 0) return;
 
     try {
-      const res = await fetch('http://localhost:3001/api/profesionales', {
+      const res = await fetch(`${API_URL}/api/profesionales`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -73,7 +78,7 @@ const ProfesionalesModal = ({ onClose }) => {
 
   const eliminarProfesional = async (id) => {
     try {
-      const res = await fetch(`http://localhost:3001/api/profesionales/${id}`, {
+      const res = await fetch(`${API_URL}/api/profesionales/${id}`, {
         method: 'DELETE',
       });
 
