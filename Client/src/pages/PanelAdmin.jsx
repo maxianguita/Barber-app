@@ -52,38 +52,38 @@ const PanelAdmin = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-950 via-gray-900 to-black flex flex-col items-center justify-center px-4 py-10">
-      <div className="w-full max-w-5xl bg-gray-800 rounded-2xl shadow-2xl p-10 text-white relative">
+      <div className="w-full max-w-full sm:max-w-4xl md:max-w-5xl bg-gray-800 rounded-2xl shadow-2xl p-6 sm:p-10 text-white relative">
 
         <button
           onClick={() => navigate('/')}
-          className="absolute left-6 top-6 text-white hover:text-sky-400 transition text-2xl"
+          className="absolute left-4 top-4 sm:left-6 sm:top-6 text-white hover:text-sky-400 transition text-xl sm:text-2xl"
         >
           ← Home
         </button>
 
-        <header className="mb-8 border-b border-gray-600 pb-4">
-          <h1 className="text-4xl font-bold text-center text-cyan-400">Panel de Administración</h1>
-          <p className="mt-1 text-gray-300 font-semibold text-center">Gestión interna de la barbería</p>
+        <header className="mb-6 sm:mb-8 border-b border-gray-600 pb-3 sm:pb-4">
+          <h1 className="text-3xl sm:text-4xl font-bold text-center text-cyan-400">Panel de Administración</h1>
+          <p className="mt-1 text-gray-300 font-semibold text-center text-sm sm:text-base">Gestión interna de la barbería</p>
         </header>
 
         {user ? (
           <>
-            <div className="text-center mb-10">
-              <p className="text-xl font-bold">
+            <div className="text-center mb-8 sm:mb-10">
+              <p className="text-lg sm:text-xl font-bold">
                 Bienvenido, <span className="text-sky-400 font-bold">{user.name}</span> 👋
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {acciones.map((accion, index) => (
                 <div
                   key={index}
                   onClick={accion.onClick}
-                  className="cursor-pointer bg-gray-700 hover:bg-sky-700 transition-all duration-200 p-6 rounded-xl shadow-lg"
+                  className="cursor-pointer bg-gray-700 hover:bg-sky-700 transition-all duration-200 p-5 sm:p-6 rounded-xl shadow-lg flex flex-col items-center text-center"
                 >
-                  <div className="text-3xl mb-2">{accion.icono}</div>
-                  <h2 className="text-xl font-bold mb-1">{accion.titulo}</h2>
-                  <p className="text-gray-300 text-sm">{accion.descripcion}</p>
+                  <div className="text-4xl mb-3">{accion.icono}</div>
+                  <h2 className="text-lg sm:text-xl font-bold mb-2">{accion.titulo}</h2>
+                  <p className="text-gray-300 text-sm sm:text-base">{accion.descripcion}</p>
                 </div>
               ))}
             </div>
@@ -94,13 +94,13 @@ const PanelAdmin = () => {
           </div>
         )}
 
-        <div className="mt-10 flex justify-center">
+        <div className="mt-8 sm:mt-10 flex justify-center">
           <button
             onClick={() => {
               logout();
               navigate('/login');
             }}
-            className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-3 rounded-lg transition duration-300 shadow-md"
+            className="bg-red-600 hover:bg-red-700 text-white font-semibold px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg transition duration-300 shadow-md w-full max-w-xs sm:max-w-none"
           >
             Cerrar Sesión
           </button>
