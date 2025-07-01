@@ -8,7 +8,7 @@ import logo1 from '../assets/barber_files/barbershop.png';
 import { useAuth } from '../context/AuthContext';
 import userlogo from '../assets/barber_files/usuario.png';
 import { LogOut } from 'lucide-react';
-import backgroundImage from '../assets/barber_files/barberfondo4.webp'; 
+import backgroundImage from '../assets/barber_files/barberfondo7.avif'; 
 
 const Navbar = () => {
   const { user, logout } = useAuth();
