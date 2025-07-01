@@ -8,6 +8,9 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { format, parse, startOfWeek, getDay } from 'date-fns';
 import es from 'date-fns/locale/es';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
+
 const locales = { es };
 
 const localizer = dateFnsLocalizer({
@@ -52,7 +55,8 @@ const TurnosPage = () => {
   useEffect(() => {
     const fetchProfesionales = async () => {
       try {
-        const res = await axios.get('http://localhost:3001/api/profesionales/con-disponibilidad');
+        const res = await axios.get(`${API_URL}/api/profesionales/con-disponibilidad`);
+
         setProfesionales(res.data);
       } catch (err) {
         toast.error('Error al cargar profesionales');
@@ -130,7 +134,7 @@ const TurnosPage = () => {
       const hora = '10:00';
 
       await axios.post(
-        'http://localhost:3001/api/turnos',
+        `${API_URL}/api/turnos`,
         {
           nombre,
           telefono,

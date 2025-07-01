@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import DatePicker from 'react-datepicker';
-// import 'react-datepicker/dist/react-datepicker.css';
+
+
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 const TurnosModal = ({ onClose }) => {
   // const [fechaHora, setFechaHora] = useState(null);
@@ -17,7 +19,7 @@ const TurnosModal = ({ onClose }) => {
   useEffect(() => {
     const fetchProfesionales = async () => {
       try {
-        const res = await axios.get('http://localhost:3001/api/profesionales/con-disponibilidad');
+        const res = await axios.get(`${API_URL}/api/profesionales/con-disponibilidad`);
         setProfesionales(res.data);
       } catch (err) {
         console.error('Error al cargar profesionales:', err);
@@ -61,7 +63,7 @@ const TurnosModal = ({ onClose }) => {
       const hora = '10:00';
 
 
-      await axios.post('http://localhost:3001/api/turnos', {
+      await axios.post(`${API_URL}/api/turnos`, {
         nombre,
         telefono,
         servicio,
