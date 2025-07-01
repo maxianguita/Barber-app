@@ -2,10 +2,16 @@ import axios from "axios";
 import React, { useState } from "react";
 import { toast, Toaster } from "sonner";
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
+
+
+
 
 const ModalLogin = ({ onClose }) => {
   const { login } = useAuth();
-
+  const navigate = useNavigate(); 
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -40,8 +46,11 @@ const ModalLogin = ({ onClose }) => {
       if (token && usuario) {
         login({ userData: usuario, token });
         toast.success('✅ Inicio de sesión exitoso');
-
+      
         setTimeout(() => {
+          if (usuario.rol === 'admin') {
+            navigate('/paneladmin');
+          }
           if (typeof onClose === 'function') {
             onClose();
           }
