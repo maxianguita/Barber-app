@@ -69,7 +69,7 @@ const ModalPerfil = ({ onClose }) => {
         {/* Botón cerrar */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-white hover:text-red-400 text-3xl font-bold transition"
+          className="absolute top-4 right-4 text-white hover:text-red-700 text-3xl font-bold transition"
           aria-label="Cerrar"
         >
           &times;
@@ -154,7 +154,7 @@ const ModalPerfil = ({ onClose }) => {
               logout();
               onClose();
             }}
-            className="inline-flex items-center gap-2 px-5 py-3 bg-white to-pink-500 hover:opacity-90 text-black text-lg font-semibold rounded-xl shadow-lg transition-all duration-300"
+            className="inline-flex items-center gap-2 px-5 py-3 to-pink-500 hover:opacity-90 text-white-700 text-lg font-semibold transition-all duration-300 hover:text-red-700"
           >
             <LogOut size={20} /> Cerrar sesión
           </button>

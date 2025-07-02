@@ -43,7 +43,7 @@ const AppContent = () => {
       {isBasicLayout && <BannerInfo />}
       {isBasicLayout && <Navbar onOpenRegister={() => setShowRegisterModal(true)} />}
 
-      <div className="App">
+      <div className="App min-h-screen bg-black">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/turnos" element={<TurnosPage />} />

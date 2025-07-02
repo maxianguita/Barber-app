@@ -103,17 +103,17 @@ const Navbar = () => {
 
         {/* Navbar Desktop */}
         <div className="hidden md:flex items-center space-x-6 text-xl font-bold">
-          <a href="/" className="text-white hover:text-gray-300">Home</a>
-          <a href="#servicios" className="text-white hover:text-gray-300">Servicios</a>
-          <button onClick={() => navigate('/cursos')} className="text-white hover:text-gray-300">Cursos</button>
+          <a href="/" className="text-white  hover:text-red-700">Home</a>
+          <a href="#servicios" className="text-white hover:text-red-700">Servicios</a>
+          <button onClick={() => navigate('/cursos')} className="text-white hover:text-red-700">Cursos</button>
           {user && (
             <div className="ml-auto">
               <button
                 onClick={() => setShowPerfil(true)}
                 title="Mi cuenta"
-                className="text-white text-sm flex items-center gap-2 border border-white rounded-full px-3 py-1 hover:bg-white hover:text-black transition"
+                className="text-white text-sm flex items-center gap-2 border border-white rounded-full px-4 py-1 hover:bg-gray-100 hover:text-red-700 transition "
               >
-                <img src={userlogo} alt="Mi cuenta" className="w-5 h-5 object-contain" />
+                <img src={userlogo} alt="Mi cuenta" className="w-5 h-5 object-contain " />
                 <span>Mi cuenta</span>
               </button>
             </div>

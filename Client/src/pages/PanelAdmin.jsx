@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { LogOut } from 'react-feather'; // Importa el icono LogOut
 
 import CrearUsuarioModal from './CrearUsuarioModall';
 import VerUsuariosModal from './VerUsuariosModal';
@@ -52,17 +52,17 @@ const PanelAdmin = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-950 via-gray-900 to-black flex flex-col items-center justify-center px-4 py-10">
-      <div className="w-full max-w-full sm:max-w-4xl md:max-w-5xl bg-gray-800 rounded-2xl shadow-2xl p-6 sm:p-10 text-white relative">
+      <div className="w-full max-w-full sm:max-w-4xl md:max-w-5xl bg-black/50 backdrop-blur-sm rounded-2xl shadow-2xl p-6 sm:p-10 text-white relative">
 
         <button
           onClick={() => navigate('/')}
-          className="absolute left-4 top-4 sm:left-6 sm:top-6 text-white hover:text-sky-400 transition text-xl sm:text-2xl"
+          className="absolute left-4 top-4 sm:left-6 sm:top-6 text-white hover:text-red-700 transition text-xl sm:text-2xl"
         >
           ← Home
         </button>
 
         <header className="mb-6 sm:mb-8 border-b border-gray-600 pb-3 sm:pb-4">
-          <h1 className="text-3xl sm:text-4xl font-bold text-center text-cyan-400">Panel de Administración</h1>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-center text-red-700">Panel de Administración</h1>
           <p className="mt-1 text-gray-300 font-semibold text-center text-sm sm:text-base">Gestión interna de la barbería</p>
         </header>
 
@@ -94,15 +94,16 @@ const PanelAdmin = () => {
           </div>
         )}
 
-        <div className="mt-8 sm:mt-10 flex justify-center">
+        {/* Botón nuevo con icono y estilos */}
+        <div className="mt-10 text-center">
           <button
             onClick={() => {
               logout();
               navigate('/login');
             }}
-            className="bg-red-600 hover:bg-red-700 text-white font-semibold px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg transition duration-300 shadow-md w-full max-w-xs sm:max-w-none"
+            className="inline-flex items-center gap-2 px-7 py-5  hover:opacity-90 text-white-700 text-lg font-semibold transition-all duration-300 hover:text-red-700"
           >
-            Cerrar Sesión
+            <LogOut size={20} /> Cerrar sesión
           </button>
         </div>
       </div>

@@ -10,7 +10,6 @@ import es from 'date-fns/locale/es';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-
 const locales = { es };
 
 const localizer = dateFnsLocalizer({
@@ -40,6 +39,12 @@ const servicios = [
   { nombre: 'COLORACION DE CABELLO/COLOR Y REFLEJOS', precio: '$45.000', duracion: '1h 40min', servicio: 'Coloración' },
 ];
 
+const CustomDayHeader = ({ date }) => (
+  <div className="h-full w-full bg-gray-300 flex items-center justify-center text-black font-semibold">
+    {diasSemana[date.getDay()]}
+  </div>
+);
+
 const TurnosPage = () => {
   const [nombre, setNombre] = useState('');
   const [telefono, setTelefono] = useState('');
@@ -56,13 +61,11 @@ const TurnosPage = () => {
     const fetchProfesionales = async () => {
       try {
         const res = await axios.get(`${API_URL}/api/profesionales/con-disponibilidad`);
-
         setProfesionales(res.data);
       } catch (err) {
         toast.error('Error al cargar profesionales');
       }
     };
-
     fetchProfesionales();
   }, []);
 
@@ -126,7 +129,6 @@ const TurnosPage = () => {
         return;
       }
 
-      // Decodificar token para extraer usuarioId
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
       const usuarioId = decodedToken.id;
 
@@ -167,87 +169,86 @@ const TurnosPage = () => {
     }
   };
 
-  const CustomDayHeader = ({ date }) => (
-    <div className="text-gray-700 text-sm font-semibold">
-      {diasSemana[date.getDay()]}
-    </div>
-  );
-
   return (
     <>
-      <button
-        onClick={() => navigate('/')}
-        className="flex items-center text-gray-600 hover:text-indigo-600 transition mb-6 mt-10"
-      >
-        <ArrowLeft className="w-5 h-5 mr-2" />
-        Volver al inicio
-      </button>
+      <div className="min-h-screen bg-black flex flex-col px-4 py-6">
+        {/* Botón Volver al inicio dentro del fondo negro */}
+        <button
+          onClick={() => navigate('/')}
+          className="  flex items-center text-gray-100 hover:text-gray-400 transition mb-6 mt-2 ml-4"
+        >
+          <ArrowLeft className="w-5 h-5 mr-2 " />
+          Volver al inicio
+        </button>
 
-      <div className="min-h-screen bg-gray-100 px-4 py-6">
-        <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-md p-6">
-          <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">Reservá tu Turno</h1>
+        <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-md p-6 flex flex-col gap-8 mt-30">
 
-          <div className="space-y-4">
-            <input
-              type="text"
-              placeholder="Nombre"
-              value={nombre}
-              onChange={(e) => {
-                const val = e.target.value;
-                if (/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/.test(val)) setNombre(val);
-              }}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            />
+          {/* Título */}
+          <h1 className="text-2xl font-bold text-gray-800 mb-2 text-center">AGENDA TU TURNO</h1>
 
-            <input
-              type="text"
-              placeholder="Teléfono"
-              value={telefono}
-              onChange={(e) => {
-                const val = e.target.value;
-                if (/^\d*$/.test(val)) setTelefono(val);
-              }}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            />
+          {/* Formulario y calendario */}
+          <div className="flex flex-col gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <input
+                type="text"
+                placeholder="Nombre"
+                value={nombre}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  if (/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]*$/.test(val)) setNombre(val);
+                }}
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
 
-            <select
-              value={servicio}
-              onChange={(e) => setServicio(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-              <option value="">Seleccioná un servicio</option>
-              {servicios.map((s, i) => (
-                <option key={i} value={s.servicio}>
-                  {s.nombre} - {s.precio}
-                </option>
-              ))}
-            </select>
+              <input
+                type="text"
+                placeholder="Teléfono"
+                value={telefono}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  if (/^\d*$/.test(val)) setTelefono(val);
+                }}
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
 
-            <select
-              value={profesionalId}
-              onChange={(e) => setProfesionalId(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-              <option value="">Seleccioná un profesional</option>
-              {profesionales.map((prof) => {
-                const d = prof.disponibilidades?.[0];
-                const info = d ? ` (${d.dia} ${d.horaInicio} a ${d.horaFin})` : '';
-                return (
-                  <option key={prof.id} value={prof.id}>
-                    {prof.nombre}{info}
+              <select
+                value={servicio}
+                onChange={(e) => setServicio(e.target.value)}
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                <option value="">Seleccioná un servicio</option>
+                {servicios.map((s, i) => (
+                  <option key={i} value={s.servicio}>
+                    {s.nombre} - {s.precio}
                   </option>
-                );
-              })}
-            </select>
-          </div>
+                ))}
+              </select>
 
-          <div className="mt-8">
+              <select
+                value={profesionalId}
+                onChange={(e) => setProfesionalId(e.target.value)}
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                <option value="">Seleccioná un profesional</option>
+                {profesionales.map((prof) => {
+                  const d = prof.disponibilidades?.[0];
+                  const info = d ? ` (${d.dia} ${d.horaInicio} a ${d.horaFin})` : '';
+                  return (
+                    <option key={prof.id} value={prof.id}>
+                      {prof.nombre}
+                      {info}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+
             <Calendar
               localizer={localizer}
               events={eventos}
               startAccessor="start"
               endAccessor="end"
-              style={{ height: 400 }}
+              style={{ height: 400, backgroundColor: '#f9fafb', borderRadius: '0.5rem' }}
               selectable
               views={['week']}
               defaultView="week"
@@ -258,16 +259,21 @@ const TurnosPage = () => {
               timeslots={2}
               onSelectEvent={(event) => {
                 setDisponibilidadId(event.id);
-                toast(`Seleccionaste: ${event.title} el ${event.start.toLocaleDateString()} de ${event.start.toLocaleTimeString()} a ${event.end.toLocaleTimeString()}`);
+                toast(
+                  `Seleccionaste: ${event.title} el ${event.start.toLocaleDateString()} de ${event.start.toLocaleTimeString()} a ${event.end.toLocaleTimeString()}`
+                );
               }}
               components={{ week: { header: CustomDayHeader } }}
             />
           </div>
+        </div>
 
+        {/* Botón centrado con margen extra */}
+        <div className="flex justify-center mt-12">
           <button
             onClick={handleConfirmarTurno}
             disabled={!isFormularioCompleto}
-            className={`mt-6 w-full py-2 rounded-lg transition font-semibold ${
+            className={`w-auto px-20 py-4 transition font-semibold rounded-lg shadow ${
               isFormularioCompleto
                 ? 'bg-indigo-600 text-white hover:bg-indigo-500'
                 : 'bg-gray-300 text-gray-600 cursor-not-allowed'
@@ -276,8 +282,8 @@ const TurnosPage = () => {
             Confirmar Turno
           </button>
         </div>
-        <Toaster position="top-center" />
       </div>
+      <Toaster position="top-center" />
     </>
   );
 };

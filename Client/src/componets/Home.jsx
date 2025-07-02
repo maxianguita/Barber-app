@@ -70,7 +70,7 @@ const Home = () => {
           <p className="text-lg">Agendá tu cita con tu barbero favorito en segundos.</p>
         </div>
         <Link to="/turnos">
-          <button className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition">
+          <button className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition  hover:text-red-700">
             Reservá ya
           </button>
         </Link>
