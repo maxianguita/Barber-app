@@ -113,7 +113,7 @@ const Navbar = () => {
                 title="Mi cuenta"
                 className="text-white text-sm flex items-center gap-2 border border-white rounded-full px-4 py-1 hover:bg-gray-100 hover:text-red-700 transition "
               >
-                <img src={userlogo} alt="Mi cuenta" className="w-5 h-5 object-contain " />
+                <img src={userlogo} alt="Mi cuenta" className="w-8 h-8 object-contain bg-gray-300 rounded-full border-white" />
                 <span>Mi cuenta</span>
               </button>
             </div>
@@ -170,9 +170,10 @@ const Navbar = () => {
 
       {/* Sidebar Mobile */}
       {isOpen && (
-        <div className="fixed top-0 right-0 h-full w-80 bg-black text-white p-6 z-50 transition-transform transform translate-x-0 rounded-l-xl flex flex-col overflow-y-auto">
+       <div className="fixed top-0 right-0 h-full w-80 bg-gray-900 text-white p-6 z-50 transition-transform transform translate-x-0 rounded-l-xl flex flex-col overflow-y-auto">
+
           <div className="flex justify-between items-center mb-6">
-            <img src={logo1} alt="Logo" className="h-20 object-contain" />
+            <img src={logo1} alt="Logo" className="h-30 object-contain" />
             <button onClick={handleCloseMenu} className="text-3xl font-bold text-white">×</button>
           </div>
 
@@ -200,7 +201,7 @@ const Navbar = () => {
                 }}
                 className="inline-flex items-center gap-2 justify-end text-white hover:text-gray-300"
               >
-                <img src={userlogo} alt="Mi cuenta" className="w-5 h-5 object-contain" />
+                <img src={userlogo} alt="Mi cuenta" className="w-10 h-10 object-contain text-white bg-white border-white rounded-full" />
                 <span>Mi cuenta</span>
               </button>
             </div>
@@ -210,7 +211,7 @@ const Navbar = () => {
             <div className="mt-20 text-right">
               <button
                 onClick={handleLogout}
-                className="inline-flex items-center gap-2 px-3 py-3 bg-white hover:bg-red-600 text-black text-lg font-semibold rounded-xl shadow-lg transition-all duration-300"
+                className="inline-flex items-center gap-2 px-3 py-3  hover:bg-red-600 text-white text-lg font-semibold rounded-xl shadow-lg transition-all duration-300"
               >
                 <LogOut size={20} /> Cerrar sesión
               </button>

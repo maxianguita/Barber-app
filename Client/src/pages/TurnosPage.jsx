@@ -52,7 +52,6 @@ const TurnosPage = () => {
   const [profesionalId, setProfesionalId] = useState('');
   const [disponibilidadId, setDisponibilidadId] = useState('');
   const [profesionales, setProfesionales] = useState([]);
-  const [disponibilidades, setDisponibilidades] = useState([]);
   const [eventos, setEventos] = useState([]);
 
   const navigate = useNavigate();
@@ -71,7 +70,6 @@ const TurnosPage = () => {
 
   useEffect(() => {
     if (!profesionalId) {
-      setDisponibilidades([]);
       setDisponibilidadId('');
       setEventos([]);
       return;
@@ -79,8 +77,6 @@ const TurnosPage = () => {
 
     const profesional = profesionales.find((p) => p.id === parseInt(profesionalId));
     if (profesional?.disponibilidades) {
-      setDisponibilidades(profesional.disponibilidades);
-
       const eventosCalendario = profesional.disponibilidades.map((disp) => {
         const fecha = getDateOfCurrentWeek(disp.dia);
         const [hInicio, mInicio] = disp.horaInicio.split(':');
@@ -102,7 +98,6 @@ const TurnosPage = () => {
 
       setEventos(eventosCalendario);
     } else {
-      setDisponibilidades([]);
       setEventos([]);
     }
 
@@ -110,11 +105,7 @@ const TurnosPage = () => {
   }, [profesionalId, profesionales]);
 
   const isFormularioCompleto =
-    nombre.trim() &&
-    telefono.trim() &&
-    servicio &&
-    profesionalId &&
-    disponibilidadId;
+    nombre.trim() && telefono.trim() && servicio && profesionalId && disponibilidadId;
 
   const handleConfirmarTurno = async () => {
     if (!isFormularioCompleto) {
@@ -147,11 +138,7 @@ const TurnosPage = () => {
           hora,
           usuarioId,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       toast.success('Turno confirmado');
@@ -161,7 +148,6 @@ const TurnosPage = () => {
       setServicio('');
       setProfesionalId('');
       setDisponibilidadId('');
-      setDisponibilidades([]);
       setEventos([]);
     } catch (err) {
       console.error('Error al confirmar turno:', err.response?.data || err.message);
@@ -172,21 +158,17 @@ const TurnosPage = () => {
   return (
     <>
       <div className="min-h-screen bg-black flex flex-col px-4 py-6">
-        {/* Botón Volver al inicio dentro del fondo negro */}
         <button
           onClick={() => navigate('/')}
-          className="  flex items-center text-gray-100 hover:text-gray-400 transition mb-6 mt-2 ml-4"
+          className="flex items-center text-gray-100 hover:text-gray-400 transition mb-6 mt-2 ml-2 sm:ml-4"
         >
-          <ArrowLeft className="w-5 h-5 mr-2 " />
+          <ArrowLeft className="w-5 h-5 mr-2" />
           Volver al inicio
         </button>
 
-        <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-md p-6 flex flex-col gap-8 mt-30">
-
-          {/* Título */}
+        <div className="w-full max-w-6xl mx-auto bg-white rounded-2xl shadow-md p-4 sm:p-6 flex flex-col gap-8 mt-8 sm:mt-12 md:mt-20 lg:mt-24">
           <h1 className="text-2xl font-bold text-gray-800 mb-2 text-center">AGENDA TU TURNO</h1>
 
-          {/* Formulario y calendario */}
           <div className="flex flex-col gap-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <input
@@ -268,7 +250,6 @@ const TurnosPage = () => {
           </div>
         </div>
 
-        {/* Botón centrado con margen extra */}
         <div className="flex justify-center mt-12">
           <button
             onClick={handleConfirmarTurno}
