@@ -29,7 +29,7 @@ const CrearUsuarioModal = ({ onClose }) => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(`${API_URL}/api/usuarios`, formData);
+      const res = await axios.post(`${API_URL}/api/auth/register`, formData);
       if (res.status === 201) {
         mostrarMensaje('Usuario creado con éxito', 'success');
         onClose(); // Cerrar el modal después de la creación
